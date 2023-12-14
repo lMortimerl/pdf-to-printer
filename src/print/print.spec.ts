@@ -49,11 +49,11 @@ it("sends the PDF file to the default printer", async () => {
 
   await print(filename);
 
-  expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-    "-print-to-default",
-    "-silent",
-    filename,
-  ]);
+  expect(execAsync).toHaveBeenCalledWith(
+    sumatraPdfPath,
+    ["-print-to-default", "-silent", filename],
+    { encoding: "utf-8" }
+  );
 });
 
 it("sends PDF file to the specific printer", async () => {
@@ -63,12 +63,11 @@ it("sends PDF file to the specific printer", async () => {
 
   await print(filename, options);
 
-  expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-    "-print-to",
-    printer,
-    "-silent",
-    filename,
-  ]);
+  expect(execAsync).toHaveBeenCalledWith(
+    sumatraPdfPath,
+    ["-print-to", printer, "-silent", filename],
+    { encoding: "utf-8" }
+  );
 });
 
 it("sends PDF file to the specific printer with a space in its name", async () => {
@@ -78,12 +77,11 @@ it("sends PDF file to the specific printer with a space in its name", async () =
 
   await print(filename, options);
 
-  expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-    "-print-to",
-    printer,
-    "-silent",
-    filename,
-  ]);
+  expect(execAsync).toHaveBeenCalledWith(
+    sumatraPdfPath,
+    ["-print-to", printer, "-silent", filename],
+    { encoding: "utf-8" }
+  );
 });
 
 it("allows users to specify which pages to print in the document", async () => {
@@ -93,7 +91,8 @@ it("allows users to specify which pages to print in the document", async () => {
 
   expect(execAsync).toHaveBeenCalledWith(
     "mocked_path_SumatraPDF-3.4.6-32.exe",
-    ["-print-to-default", "-silent", "-print-settings", "1,3", filename]
+    ["-print-to-default", "-silent", "-print-settings", "1,3", filename],
+    { encoding: "utf-8" }
   );
 });
 
@@ -115,13 +114,17 @@ describe("paper size", () => {
 
       await print(filename, options);
 
-      expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-        "-print-to-default",
-        "-silent",
-        "-print-settings",
-        `paper=${paperSize}`,
-        filename,
-      ]);
+      expect(execAsync).toHaveBeenCalledWith(
+        sumatraPdfPath,
+        [
+          "-print-to-default",
+          "-silent",
+          "-print-settings",
+          `paper=${paperSize}`,
+          filename,
+        ],
+        { encoding: "utf-8" }
+      );
     });
   });
 });
@@ -134,13 +137,17 @@ describe("orientation", () => {
 
       await print(filename, options);
 
-      expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-        "-print-to-default",
-        "-silent",
-        "-print-settings",
-        orientation,
-        filename,
-      ]);
+      expect(execAsync).toHaveBeenCalledWith(
+        sumatraPdfPath,
+        [
+          "-print-to-default",
+          "-silent",
+          "-print-settings",
+          orientation,
+          filename,
+        ],
+        { encoding: "utf-8" }
+      );
     });
   });
 
@@ -165,13 +172,17 @@ describe("monochrome", () => {
 
     await print(filename, options);
 
-    expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-      "-print-to-default",
-      "-silent",
-      "-print-settings",
-      "monochrome",
-      filename,
-    ]);
+    expect(execAsync).toHaveBeenCalledWith(
+      sumatraPdfPath,
+      [
+        "-print-to-default",
+        "-silent",
+        "-print-settings",
+        "monochrome",
+        filename,
+      ],
+      { encoding: "utf-8" }
+    );
   });
 
   it("allows to print in color", async () => {
@@ -182,13 +193,11 @@ describe("monochrome", () => {
 
     await print(filename, options);
 
-    expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-      "-print-to-default",
-      "-silent",
-      "-print-settings",
-      "color",
-      filename,
-    ]);
+    expect(execAsync).toHaveBeenCalledWith(
+      sumatraPdfPath,
+      ["-print-to-default", "-silent", "-print-settings", "color", filename],
+      { encoding: "utf-8" }
+    );
   });
 });
 
@@ -202,13 +211,11 @@ describe("subset", () => {
 
       await print(filename, options);
 
-      expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-        "-print-to-default",
-        "-silent",
-        "-print-settings",
-        "odd",
-        filename,
-      ]);
+      expect(execAsync).toHaveBeenCalledWith(
+        sumatraPdfPath,
+        ["-print-to-default", "-silent", "-print-settings", "odd", filename],
+        { encoding: "utf-8" }
+      );
     });
   });
 
@@ -232,13 +239,11 @@ describe("scale", () => {
 
       await print(filename, options);
 
-      expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-        "-print-to-default",
-        "-silent",
-        "-print-settings",
-        scale,
-        filename,
-      ]);
+      expect(execAsync).toHaveBeenCalledWith(
+        sumatraPdfPath,
+        ["-print-to-default", "-silent", "-print-settings", scale, filename],
+        { encoding: "utf-8" }
+      );
     });
   });
 
@@ -262,13 +267,11 @@ describe("side", () => {
 
       await print(filename, options);
 
-      expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-        "-print-to-default",
-        "-silent",
-        "-print-settings",
-        side,
-        filename,
-      ]);
+      expect(execAsync).toHaveBeenCalledWith(
+        sumatraPdfPath,
+        ["-print-to-default", "-silent", "-print-settings", side, filename],
+        { encoding: "utf-8" }
+      );
     });
   });
 
@@ -291,13 +294,11 @@ describe("bin", () => {
 
     await print(filename, options);
 
-    expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-      "-print-to-default",
-      "-silent",
-      "-print-settings",
-      "bin=1",
-      filename,
-    ]);
+    expect(execAsync).toHaveBeenCalledWith(
+      sumatraPdfPath,
+      ["-print-to-default", "-silent", "-print-settings", "bin=1", filename],
+      { encoding: "utf-8" }
+    );
   });
 });
 
@@ -308,13 +309,11 @@ describe("copies", () => {
 
     await print(filename, options);
 
-    expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-      "-print-to-default",
-      "-silent",
-      "-print-settings",
-      "3x",
-      filename,
-    ]);
+    expect(execAsync).toHaveBeenCalledWith(
+      sumatraPdfPath,
+      ["-print-to-default", "-silent", "-print-settings", "3x", filename],
+      { encoding: "utf-8" }
+    );
   });
 });
 
@@ -324,10 +323,11 @@ it("does not set a printer when printDialog is set to true", async () => {
 
   await print(filename, options);
 
-  expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-    "-print-dialog",
-    filename,
-  ]);
+  expect(execAsync).toHaveBeenCalledWith(
+    sumatraPdfPath,
+    ["-print-dialog", filename],
+    { encoding: "utf-8" }
+  );
 });
 
 it("allows to turn on SumatraPDF error messages", async () => {
@@ -336,10 +336,11 @@ it("allows to turn on SumatraPDF error messages", async () => {
 
   await print(filename, options);
 
-  expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-    "-print-to-default",
-    filename,
-  ]);
+  expect(execAsync).toHaveBeenCalledWith(
+    sumatraPdfPath,
+    ["-print-to-default", filename],
+    { encoding: "utf-8" }
+  );
 });
 
 it("allows to set multiple print settings", async () => {
@@ -355,14 +356,18 @@ it("allows to set multiple print settings", async () => {
 
   await print(filename, options);
 
-  expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
-    "-print-to",
-    "Zebra",
-    "-silent",
-    "-print-settings",
-    "1-3,5,odd,fit,bin=2,paper=A2",
-    filename,
-  ]);
+  expect(execAsync).toHaveBeenCalledWith(
+    sumatraPdfPath,
+    [
+      "-print-to",
+      "Zebra",
+      "-silent",
+      "-print-settings",
+      "1-3,5,odd,fit,bin=2,paper=A2",
+      filename,
+    ],
+    { encoding: "utf-8" }
+  );
 });
 
 it("works when custom SumatraPDF path specified", async () => {
@@ -371,11 +376,11 @@ it("works when custom SumatraPDF path specified", async () => {
 
   await print(filename, { sumatraPdfPath: anotherSumatraPdfPath });
 
-  expect(execAsync).toHaveBeenCalledWith(anotherSumatraPdfPath, [
-    "-print-to-default",
-    "-silent",
-    filename,
-  ]);
+  expect(execAsync).toHaveBeenCalledWith(
+    anotherSumatraPdfPath,
+    ["-print-to-default", "-silent", filename],
+    { encoding: "utf-8" }
+  );
 });
 
 it("fails with an error", () => {

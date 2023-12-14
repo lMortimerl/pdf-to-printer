@@ -63,7 +63,7 @@ export default async function print(
   args.push(pdf);
 
   try {
-    await execAsync(sumatraPdf, args);
+    await execAsync(sumatraPdf, args, { encoding: "utf-8" });
   } catch (error) {
     throw error;
   }
